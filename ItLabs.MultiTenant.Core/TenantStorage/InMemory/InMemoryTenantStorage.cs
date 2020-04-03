@@ -2,6 +2,9 @@
 
 namespace ItLabs.MultiTenant.Core
 {
+    /// <summary>
+    /// In-Memory storage for tenant data, used for showcase only
+    /// </summary>
     public class InMemoryTenantStorage : ITenantStorage<Tenant>
     {
         private readonly ICache _cache;
@@ -14,6 +17,7 @@ namespace ItLabs.MultiTenant.Core
 
         public async Task<Tenant> GetTenantAsync(string identifier)
         {
+            //Add the tenant if it doesn't exists for showcase usage
             var tenant = _cache.GetOrSet(identifier, () =>
                 new Tenant
                 {
@@ -25,6 +29,9 @@ namespace ItLabs.MultiTenant.Core
             return await Task.FromResult(tenant);
         }
 
+        /// <summary>
+        /// Load the cache with dummy values
+        /// </summary>
         public void LoadCache()
         {
             _cache.GetOrSet("localhost:5000", () =>

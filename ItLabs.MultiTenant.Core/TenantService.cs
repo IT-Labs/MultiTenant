@@ -2,6 +2,10 @@
 
 namespace ItLabs.MultiTenant.Core
 {
+    /// <summary>
+    /// Service to get the tenant data
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class TenantService<T> where T : Tenant
     {
         private readonly ITenantIdentificationStrategy _tenantIdentificationStrategy;
@@ -13,6 +17,12 @@ namespace ItLabs.MultiTenant.Core
             _tenantStorage = tenantStorage;
         }
 
+        /// <summary>
+        /// Get Tenant data 
+        /// Use the tenant identification strategy to get the tenant identifier
+        /// Use the tenant storage and tenant identifier to get the tenant data
+        /// </summary>
+        /// <returns>The Tenant</returns>
         public async Task<T> GetTenantAsync()
         {
             var identifier = await _tenantIdentificationStrategy.GetTenantIdentifierAsync();

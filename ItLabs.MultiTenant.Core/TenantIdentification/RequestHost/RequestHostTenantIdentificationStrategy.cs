@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace ItLabs.MultiTenant.Core
 {
+    /// <summary>
+    /// Identify the tenant by the HTTP Request Host value
+    /// </summary>
     public class RequestHostTenantIdentificationStrategy : ITenantIdentificationStrategy
     {
         private readonly IHttpContextAccessor _httpContextAccessor;

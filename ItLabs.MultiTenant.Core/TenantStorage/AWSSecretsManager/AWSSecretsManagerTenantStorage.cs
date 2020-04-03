@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ItLabs.MultiTenant.Core
 {
+    /// <summary>
+    /// AWS Secrets Manager storage for tenant data (managed AWS service)
+    /// </summary>
     public class AWSSecretsManagerTenantStorage : ITenantStorage<Tenant>
     {
         private readonly ICache _cache;
@@ -17,12 +20,27 @@ namespace ItLabs.MultiTenant.Core
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Get the tenant data from AWS Secrets Manager by tenant identifier 
+        /// Check cache before getting the data
+        /// </summary>
+        /// <param name="identifier">The tenant identifier</param>
+        /// <returns>The Tenant</returns>
         public async Task<Tenant> GetTenantAsync(string identifier)
         {
             var tenant = _cache.GetOrSet(identifier, () => GetTenantFromAWSSecretsManager(secretTagKeyIdentifier: identifier));
             return await Task.FromResult(tenant);
         }
 
+
+        /// <summary>
+        /// Get tenant data by AWS secret tag (as tenant identifier)
+        /// Get the key names only returned from AWS Secret Manager (by removing the secret name)
+        /// AWS credentials needed. Use any approach given here: https://aws.amazon.com/blogs/security/a-new-and-standardized-way-to-manage-credentials-in-the-aws-sdks/
+        /// Can be modified depending on the secrets organization at AWS Secrets Manager
+        /// </summary>
+        /// <param name="identifier">The tenant identifier</param>
+        /// <returns>The Tenant</returns>
         private Tenant GetTenantFromAWSSecretsManager(string secretTagKeyIdentifier)
         {
             var awsSecrets = new ConfigurationBuilder().AddSecretsManager(

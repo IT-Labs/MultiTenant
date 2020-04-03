@@ -27,9 +27,19 @@ namespace ItLabs.MultiTenant.Api
             services.TryAddSingleton(provider => Configuration);
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.TryAddSingleton<ICache>(cache => new ConcurrentDictionaryCache(new ConcurrentDictionary<string, object>()));
+            //Use the HTTP Request Host strategy to identify the tenant
+            //Can be switched to a different ITenantIdentificationStrategy implementation (i.e. HTTP header, JWT token claim etc.)
             services.TryAddSingleton<ITenantIdentificationStrategy, RequestHostTenantIdentificationStrategy>();
+
+            //Use the AWS Secrets Manager to store the tenant data
+            //Can be switched to a different ITenantStorage implementation (i.e. app.settings, Azure App Service, SQL Database etc.)
             services.TryAddSingleton<ITenantStorage<Tenant>, AWSSecretsManagerTenantStorage>();
+
+            //Use ConcurrentDictionary for caching the tenant data
+            //Can be switched to a different ICache implementation (i.e. global cache like Redis, Memcached)
+            services.TryAddSingleton<ICache>(cache => new ConcurrentDictionaryCache(new ConcurrentDictionary<string, object>()));
+
+            //Must be transient, to create instance on each request and switch between tenants
             services.TryAddTransient<TenantService<Tenant>>();
 
             services.AddDbContext<TenantsDbContext>();

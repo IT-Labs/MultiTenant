@@ -3,6 +3,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace ItLabs.MultiTenant.Core
 {
+    /// <summary>
+    /// The EF DBContext used for storing tenant data, when SQL database is used as tenant storage
+    /// </summary>
     public class TenantsDbContext : DbContext
     {
         private readonly IConfiguration _configuration;

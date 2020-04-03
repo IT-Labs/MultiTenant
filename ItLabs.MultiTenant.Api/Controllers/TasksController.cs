@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ItLabs.MultiTenant.Api.Controllers
 {
+    /// <summary>
+    /// Controller used to showcase the different tasks per tenant
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class TasksController : ControllerBase

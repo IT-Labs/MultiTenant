@@ -3,6 +3,9 @@ using System.Collections.Concurrent;
 
 namespace ItLabs.MultiTenant.Core
 {
+    /// <summary>
+    /// Concurrent Dictionary cache implementation 
+    /// </summary>
     public class ConcurrentDictionaryCache : ICache
     {
         private readonly ConcurrentDictionary<string, object> _dictionary;

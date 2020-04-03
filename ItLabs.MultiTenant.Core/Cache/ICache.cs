@@ -2,6 +2,9 @@
 
 namespace ItLabs.MultiTenant.Core
 {
+    /// <summary>
+    /// Cache interface
+    /// </summary>
     public interface ICache
     {
         bool Exists(string key);
