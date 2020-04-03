@@ -29,7 +29,7 @@ namespace ItLabs.MultiTenant.Api
 
             services.TryAddSingleton<ICache>(cache => new ConcurrentDictionaryCache(new ConcurrentDictionary<string, object>()));
             services.TryAddSingleton<ITenantIdentificationStrategy, RequestHostTenantIdentificationStrategy>();
-            services.TryAddSingleton<ITenantStorage<Tenant>, SQLDatabaseTenantStorage>();
+            services.TryAddSingleton<ITenantStorage<Tenant>, AWSSecretsManagerTenantStorage>();
             services.TryAddTransient<TenantService<Tenant>>();
 
             services.AddDbContext<TenantsDbContext>();

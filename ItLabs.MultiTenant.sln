@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItLabs.MultiTenant.Api", "ItLabs.MultiTenant.Api\ItLabs.MultiTenant.Api.csproj", "{0FD05804-A2A3-4D0C-97D3-2CFE799414E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItLabs.MultiTenant.Core", "ItLabs.MultiTenant.Core\ItLabs.MultiTenant.Core.csproj", "{68921654-CCEE-4A3F-9B36-DD036E99B418}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItLabs.MultiTenant.Core", "ItLabs.MultiTenant.Core\ItLabs.MultiTenant.Core.csproj", "{68921654-CCEE-4A3F-9B36-DD036E99B418}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
