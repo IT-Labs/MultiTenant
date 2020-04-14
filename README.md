@@ -30,7 +30,7 @@ Other implementations can be added and used, like storing tenant's data in json 
 #### 3. Caching
 Tenant's data will be read on each API request and therefore some cache mechanism is needed in order to improve the API performance.
 In this showcase, a concurrent dictionary is used to cache each tenant's data.
- ```csharp
+```csharp
        services.TryAddSingleton<ICache>(cache => new ConcurrentDictionaryCache(new ConcurrentDictionary<string, object>()));
 ```
 
@@ -49,6 +49,3 @@ Other implementations can be added and used, like caching tenant's data in Redis
     - Use **TenantsDbContext** EF migrations to create the database schema
     - Store the tenant's data (Id, ConnectionString)
     - setup **ConnectionStrings:MasterDatabase** config in app.settings json
-
-
-

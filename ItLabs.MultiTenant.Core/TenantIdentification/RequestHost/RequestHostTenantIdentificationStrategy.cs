@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace ItLabs.MultiTenant.Core
 {
     /// <summary>
-    /// Identify the tenant by the HTTP Request Host value
+    /// Identify the tenant by the HTTP Request Host Subdomain value
     /// </summary>
     public class RequestHostTenantIdentificationStrategy : ITenantIdentificationStrategy
     {
@@ -23,8 +23,8 @@ namespace ItLabs.MultiTenant.Core
                 throw new Exception("Request Host is not found");
             }
 
-            var requestHost = _httpContextAccessor.HttpContext.Request.Host.Value;
-            return await Task.FromResult(requestHost);
+            var requestHostSubdomain = _httpContextAccessor.HttpContext.Request.Host.Value.Split(".")[0];
+            return await Task.FromResult(requestHostSubdomain);
         }
     }
 }

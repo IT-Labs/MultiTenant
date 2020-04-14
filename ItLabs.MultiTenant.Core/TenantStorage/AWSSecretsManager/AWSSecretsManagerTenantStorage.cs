@@ -51,6 +51,7 @@ namespace ItLabs.MultiTenant.Core
                     opts.KeyGenerator = (entry, key) => key.Split(":").LastOrDefault();
                 }).Build();
 
+
             var tenantId = awsSecrets.GetValue("Id", defaultValue: string.Empty);
             var connectionString = awsSecrets.GetValue("ConnectionString", defaultValue: string.Empty);
 
