@@ -47,7 +47,8 @@ namespace ItLabs.MultiTenant.Core
                 region: RegionEndpoint.GetBySystemName(_configuration["AWSRegion"]),
                 configurator: opts =>
                 {
-                    opts.SecretFilter = entry => entry.Tags.Any(tag => tag.Key == secretTagKeyIdentifier);
+                    // opts.SecretFilter = entry => entry.Tags.Any(tag => tag.Key == secretTagKeyIdentifier);
+                    opts.SecretFilter = entry => entry.Name == secretTagKeyIdentifier;
                     opts.KeyGenerator = (entry, key) => key.Split(":").LastOrDefault();
                 }).Build();
 
