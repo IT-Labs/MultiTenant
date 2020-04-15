@@ -24,5 +24,13 @@ namespace ItLabs.MultiTenant.Api.Controllers
             var tasks = _dbContext.Tasks.ToList();
             return tasks;
         }
+
+        [HttpPost]
+        public int Post(Task task)
+        {
+            _dbContext.Tasks.Add(task);
+            var taskId = _dbContext.SaveChanges();
+            return taskId;
+        }
     }
 }
