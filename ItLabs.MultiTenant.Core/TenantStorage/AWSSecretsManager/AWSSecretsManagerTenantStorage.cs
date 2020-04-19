@@ -47,7 +47,6 @@ namespace ItLabs.MultiTenant.Core
                 region: RegionEndpoint.GetBySystemName(_configuration["AWSRegion"]),
                 configurator: opts =>
                 {
-                    // opts.SecretFilter = entry => entry.Tags.Any(tag => tag.Key == secretTagKeyIdentifier);
                     opts.SecretFilter = entry => entry.Name == secretTagKeyIdentifier;
                     opts.KeyGenerator = (entry, key) => key.Split(":").LastOrDefault();
                 }).Build();
@@ -56,9 +55,9 @@ namespace ItLabs.MultiTenant.Core
             var tenantId = awsSecrets.GetValue("Id", defaultValue: string.Empty);
             var connectionString = awsSecrets.GetValue("ConnectionString", defaultValue: string.Empty);
 
-            if (string.IsNullOrEmpty(tenantId) || string.IsNullOrEmpty(connectionString))
+            if (string.IsNullOrEmpty(connectionString))
             {
-                throw new Exception($"Tenant data with secret tag identifier: {secretTagKeyIdentifier} is not found");
+                throw new Exception($"Tenant {secretTagKeyIdentifier} has no ConnectionString defined");
             }
 
             var tenant = new Tenant

@@ -26,7 +26,7 @@ namespace ItLabs.MultiTenant.Api.Controllers
         }
 
         [HttpPost]
-        public int Post(Task task)
+        public int Post([FromForm]Task task)
         {
             _dbContext.Tasks.Add(task);
             var taskId = _dbContext.SaveChanges();
